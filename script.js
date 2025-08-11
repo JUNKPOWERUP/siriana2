@@ -29,35 +29,36 @@ function renderLevel() {
 
 // 色をより多様に変化させる関数
 function getColors(level) {
-  // ベース色をランダムに作成
-  const baseR = Math.floor(Math.random() * 256);
-  const baseG = Math.floor(Math.random() * 256);
-  const baseB = Math.floor(Math.random() * 256);
+  // ベース色をHSLの範囲で制限
+  const h = Math.floor(Math.random() * 360);
+  const s = Math.floor(Math.random() * 41) + 40; // 彩度40〜80%
+  const l = Math.floor(Math.random() * 41) + 30; // 明度30〜70%
 
-  // RGB→HSLに変換
-  let [h, s, l] = rgbToHsl(baseR, baseG, baseB);
-
-  // 差の大きさ（レベルが上がるほど小さく）
+  // 差の大きさ（序盤でも差が極端にならないように）
   const diffValue = Math.max(1, 30 - level * 0.25);
 
-  // 色相・彩度・明度のどれを変えるかランダムで選択
+  // 色相・彩度・明度のどれを変えるかランダム
+  let h2 = h, s2 = s, l2 = l;
   const mode = Math.floor(Math.random() * 3);
+
   if (mode === 0) {
-    h = (h + diffValue) % 360; // 色相を変える
+    h2 = (h + diffValue) % 360;
   } else if (mode === 1) {
-    s = Math.min(100, Math.max(0, s + diffValue)); // 彩度を変える
+    s2 = Math.min(100, Math.max(0, s + (Math.random() < 0.5 ? diffValue : -diffValue)));
   } else {
-    l = Math.min(100, Math.max(0, l + diffValue)); // 明度を変える
+    l2 = Math.min(100, Math.max(0, l + (Math.random() < 0.5 ? diffValue : -diffValue)));
   }
 
-  // HSL→RGBに戻す
-  const [diffR, diffG, diffB] = hslToRgb(h, s, l);
+  // HSL→RGBに変換
+  const [baseR, baseG, baseB] = hslToRgb(h, s, l);
+  const [diffR, diffG, diffB] = hslToRgb(h2, s2, l2);
 
   return {
     base: `rgb(${baseR}, ${baseG}, ${baseB})`,
     diff: `rgb(${diffR}, ${diffG}, ${diffB})`
   };
 }
+
 
 // RGB→HSL変換
 function rgbToHsl(r, g, b) {
