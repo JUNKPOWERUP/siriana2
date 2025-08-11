@@ -1,31 +1,83 @@
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
   text-align: center;
-  background: #f0f0f0;
+  background: linear-gradient(135deg, #f9f9f9, #e3e7f0);
+  color: #333;
 }
+
 .screen {
   display: none;
   padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
+
 .active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+h1, h2 {
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 button {
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 18px;
-  cursor: pointer;
+  padding: 14px 28px;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
+  gap: 8px;
+  width: 90%;
   max-width: 400px;
-  margin: 20px auto;
+  margin-top: 20px;
 }
+
 .cell {
   width: 100%;
   aspect-ratio: 1 / 1;
+  border-radius: 8px;
   cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.cell:active {
+  transform: scale(0.95);
+}
+
+/* スマホ用調整 */
+@media (max-width: 600px) {
+  h1, h2 {
+    font-size: 1.6rem;
+  }
+  p {
+    font-size: 0.95rem;
+  }
+  button {
+    width: 80%;
+    font-size: 1.1rem;
+  }
 }
