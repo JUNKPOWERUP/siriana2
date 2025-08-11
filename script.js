@@ -59,7 +59,7 @@ function handleClick(correct) {
 function endGame(cleared) {
   showScreen('result');
   document.getElementById('result-message').textContent =
-    cleared ? 'おめでとう！レベル100達成！' : `残念！レベル${level}で終了`;
+    cleared ? 'レベル100達成！するとは…お察しシマス！！' : `残念です…！レベル${level}で終了でした`;
 }
 
 function toggleBgm() {
