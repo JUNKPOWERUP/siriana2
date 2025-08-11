@@ -81,3 +81,19 @@ button:hover {
     font-size: 1.1rem;
   }
 }
+
+.screen-image {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* スマホ対応で幅を少し広げる */
+@media (max-width: 600px) {
+  .screen-image {
+    max-width: 90%;
+  }
+}
+
